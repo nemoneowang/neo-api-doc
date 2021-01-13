@@ -1,0 +1,39 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  userId: Int!
+  username: String!
+  password: String!
+}
+
+type ValidatorUser {
+  userId: Int!
+  username: String!
+  password: String!
+  token: String!
+}
+
+type Query {
+  user(userId: Int!): User!
+  whoAm: User!
+  login(password: String!, username: String!): ValidatorUser!
+}
+
+type Mutation {
+  createUser(user: newUserInput!): User!
+  deleteUser(id: Int!): User!
+  updateUser(user: updateUserInput!): User!
+}
+
+input newUserInput {
+  username: String!
+  password: String!
+}
+
+input updateUserInput {
+  username: String!
+  password: String!
+  id: Float!
+}
