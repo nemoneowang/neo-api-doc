@@ -4,6 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { newUserInput } from '../dto/new-user.input';
 import * as bcrypt from 'bcrypt';
+import { Role } from '../model/role.entity';
 @Injectable()
 export class UserService {
   constructor(
@@ -11,7 +12,9 @@ export class UserService {
     private userRepository: Repository<User>,
   ) {}
   getUserById(userId: number): Promise<User> {
-    return this.userRepository.findOne(userId);
+    const user = this.userRepository.findOne(userId, { relations: ['roleList'] });
+
+    return user;
   }
 
   async create(user: newUserInput): Promise<User> {

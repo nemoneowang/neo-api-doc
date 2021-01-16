@@ -15,11 +15,18 @@ export class UserResolver {
   @Query(() => User)
   @UseGuards(GqlAuthGuard)
   async user(@CurrentUser() user: User, @Args({ name: 'userId', type: () => Int }) userId: number): Promise<User> {
-    return await this.userService.getUserById(userId);
+    const u = await this.userService.getUserById(userId);
+    if (u) {
+      console.log(u);
+      console.log(u.roleList);
+      return u;
+    } else {
+      throw new Error('id错误');
+    }
   }
   @Query(() => User)
   @UseGuards(GqlAuthGuard)
-  async whoAm(@CurrentUser() user: User): Promise<User> {
+  async whoAmI(@CurrentUser() user: User): Promise<User> {
     return await this.userService.getUserById(user.userId);
   }
 

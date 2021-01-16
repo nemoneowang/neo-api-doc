@@ -2,22 +2,30 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Role {
+  roleId: Int!
+  roleName: String!
+  userList: [User!]
+}
+
 type User {
   userId: Int!
   username: String!
   password: String!
+  roleList: [Role!]
 }
 
 type ValidatorUser {
   userId: Int!
   username: String!
   password: String!
+  roleList: [Role!]
   token: String!
 }
 
 type Query {
   user(userId: Int!): User!
-  whoAm: User!
+  whoAmI: User!
   login(password: String!, username: String!): ValidatorUser!
 }
 
